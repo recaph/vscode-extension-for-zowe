@@ -1172,7 +1172,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run build && npm run lint && npm run update",
-    "build": "gulp build && npm run license && tsc --build --pretty",
+    "build": "gulp build && npm run license && tsc --build --pretty && madge -c out",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test:unit": "jest  \".*__tests__.*\\.unit\\.test\\.ts\" --coverage",
     "test": "npm run test:unit",
@@ -1222,6 +1222,7 @@
     "jsdom": "11.11.0",
     "keytar": "^5.0.0",
     "log4js": "3.0.5",
+    "madge": "^3.7.0",
     "markdownlint-cli": "^0.16.0",
     "mem": "^6.0.1",
     "run-sequence": "^2.2.1",
