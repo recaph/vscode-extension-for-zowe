@@ -9,10 +9,12 @@
 *                                                                                 *
 */
 
+import * as PromiseQueue from "promise-queue";
 import { IProfileLoaded } from "@zowe/imperative";
 import { ZoweExplorerApi } from "./ZoweExplorerApi";
 import { ZosmfUssApi as ZosmfUssApi, ZosmfMvsApi, ZosmfJesApi } from "./ZoweExplorerZosmfApi";
 import { ZoweExplorerExtender } from "./ZoweExplorerExtender";
+import { Profiles } from "../Profiles";
 
 import * as nls from "vscode-nls";
 const localize = nls.config({messageFormat: nls.MessageFormat.file})();
@@ -79,6 +81,9 @@ export class ZoweExplorerApiRegister implements ZoweExplorerApi.IApiRegisterClie
      */
     private static register: ZoweExplorerApiRegister = new ZoweExplorerApiRegister();
 
+    // Queue of promises to process sequentially when multiple extension register in parallel
+    private static refreshProfilesQueue = new PromiseQueue(1, Infinity);
+
     // These are the different API registries currently available to extenders
     private ussApiImplementations = new Map<string, ZoweExplorerApi.IUss>();
     private mvsApiImplementations = new Map<string, ZoweExplorerApi.IMvs>();
@@ -97,6 +102,11 @@ export class ZoweExplorerApiRegister implements ZoweExplorerApi.IApiRegisterClie
     // TODO: the redundant functions that follow could be done with generics, but as we are using
     // interfaces here that do not have type meta data it would require that they have type info
     // added. On the other these functions make the client code easier to read and understand.
+
+    public async reloadProfiles(): Promise<void> {
+        // sequentially reload the internal profiles cache to satisfy all the newly added profile types
+        ZoweExplorerApiRegister.refreshProfilesQueue.add( () => Profiles.getInstance().refresh());
+    }
 
     /**
      * Other VS Code extension need to call this to register their USS API implementation.
