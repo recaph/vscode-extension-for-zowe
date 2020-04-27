@@ -59,4 +59,13 @@ export class ZoweExplorerExtender {
         return getLinkedProfile(primaryNode, type);
     }
 
+
+    /**
+     * After an extenders registered all its API extensions it
+     * might want to request that profiles should get reloaded
+     * to make them automatically appears in the Explorer drop-
+     * down dialogs.
+     */
+    public reloadProfiles?(): Promise<void>;
+
 }
