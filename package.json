@@ -68,6 +68,228 @@
         "command": "zowe.searchInAllLoadedItems",
         "key": "ctrl+alt+p",
         "mac": "cmd+alt+p"
+      },
+      {
+        "command": "zowe.pasteDataSet",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v",
+        "when": "sideBarFocus && focusedView == zowe.explorer && viewItem =~ /^(ds.*|^pds.*)/"
+      },
+      {
+        "command": "zowe.addSession",
+        "key": "ctrl+alt+b",
+        "mac": "cmd+alt+b",
+        "when": "sideBarFocus && focusedView == zowe.explorer"
+      },
+      {
+        "command": "zowe.uss.addSession",
+        "key": "ctrl+alt+b",
+        "mac": "cmd+alt+b",
+        "when": "sideBarFocus && focusedView == zowe.uss.explorer"
+      },
+      {
+        "command": "zowe.addJobsSession",
+        "key": "ctrl+z+^",
+        "mac": "cmd+z+^",
+        "when": "sideBarFocus && focusedView == zowe.jobs"
+      },
+      {
+        "command": "zowe.refreshAll",
+        "key": "ctrl+z+r",
+        "mac": "cmd+z+r",
+        "when": "view == zowe.explorer"
+      },
+      {
+        "command": "zowe.uss.refreshAll",
+        "key": "ctrl+z+r",
+        "mac": "cmd+z+r",
+        "when": "view == zowe.uss.explorer"
+      },
+      {
+        "command": "zowe.refreshAllJobs",
+        "key": "ctrl+z+r",
+        "mac": "cmd+z+r",
+        "when": "view == zowe.jobs"
+      },
+      {
+        "command": "zowe.all.profilelink",
+        "key": "ctrl+z+a",
+        "mac": "cmd+z+a",
+        "when": "view == zowe.explorer && viewItem =~ /^(?!.*_fav.*)session.*/"
+      },
+      {
+        "command": "zowe.all.profilelink",
+        "key": "ctrl+z+a",
+        "mac": "cmd+z+a",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^(?!.*_fav.*)ussSession.*/"
+      },
+      {
+        "command": "zowe.all.profilelink",
+        "key": "ctrl+z+a",
+        "mac": "cmd+z+a",
+        "when": "view == zowe.jobs && viewItem =~ /^(?!.*_fav.*)server.*/"
+      },
+      {
+        "command": "zowe.createDataSet",
+        "key": "ctrl+alt+n",
+        "mac": "cmd+alt+n",
+        "when": "view == zowe.explorer && viewItem =~ /^(?!.*_fav.*)session.*/"
+      },
+      {
+        "command": "zowe.uss.createFolder",
+        "key": "ctrl+alt+n",
+        "mac": "cmd+alt+n",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^directory.*/"
+      },
+      {
+        "command": "zowe.createMember",
+        "key": "ctrl+alt+n",
+        "mac": "cmd+alt+n",
+        "when": "view == zowe.explorer && viewItem =~ /^pds.*/"
+      },
+      {
+        "command": "zowe.uss.createFile",
+        "key": "ctrl+alt+m",
+        "mac": "cmd+alt+m",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^directory.*/"
+      },
+      {
+        "command": "zowe.removeFavorite",
+        "key": "ctrl+z+-",
+        "mac": "cmd+z+-",
+        "when": "view == zowe.explorer && viewItem =~ /^(pds|ds|migr).*_fav.*/"
+      },
+      {
+        "command": "zowe.uss.removeFavorite",
+        "key": "ctrl+z+-",
+        "mac": "cmd+z+-",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^(?!ussSession.*).*_fav.*/"
+      },
+      {
+        "command": "zowe.jobs.removeFavorite",
+        "key": "ctrl+z+-",
+        "mac": "cmd+z+-",
+        "when": "view == zowe.jobs && viewItem =~ /^job.*_fav.*/"
+      },
+      {
+        "command": "zowe.removeSavedSearch",
+        "key": "ctrl+z+-",
+        "mac": "cmd+z+-",
+        "when": "view == zowe.explorer && viewItem =~ /^session.*_fav.*/"
+      },
+      {
+        "command": "zowe.uss.removeSavedSearch",
+        "key": "ctrl+z+-",
+        "mac": "cmd+z+-",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^ussSession.*_fav.*/"
+      },
+      {
+        "command": "zowe.addFavorite",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d",
+        "when": "view == zowe.explorer && viewItem =~ /^(?!.*_fav)(member|migr|ds|pds).*/"
+      },
+      {
+        "command": "zowe.uss.addFavorite",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^(?!.*_fav.*)(textFile.*|binaryFile.*|directory.*)/"
+      },
+      {
+        "command": "zowe.jobs.addFavorite",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d",
+        "when": "view == zowe.jobs && viewItem =~ /^(?!.*_fav.*)job.*/"
+      },
+      {
+        "command": "zowe.renameDataSet",
+        "key": "ctrl+alt+F2",
+        "mac": "cmd+alt+F2",
+        "when": "view == zowe.explorer && viewItem =~ /^pds.*/"
+      },
+      {
+        "command": "zowe.renameDataSet",
+        "key": "ctrl+alt+F2",
+        "mac": "cmd+alt+F2",
+        "when": "view == zowe.explorer && viewItem =~ /^ds.*/"
+      },
+      {
+        "command": "zowe.renameDataSetMember",
+        "key": "ctrl+alt+F2",
+        "mac": "cmd+alt+F2",
+        "when": "view == zowe.explorer && viewItem =~ /^member.*/"
+      },
+      {
+        "command": "zowe.renameNode",
+        "key": "ctrl+alt+F2",
+        "mac": "cmd+alt+F2",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^(?!(ussSession|favorite))/"
+      },
+      {
+        "command": "zowe.deleteJob",
+        "key": "ctrl+delete",
+        "mac": "cmd+delete",
+        "when": "view == zowe.jobs && viewItem =~ /^(?!.*_fav.*)job.*/"
+      },
+      {
+        "command": "zowe.deletePDS",
+        "key": "ctrl+delete",
+        "mac": "cmd+delete",
+        "when": "view == zowe.explorer && viewItem =~ /^pds.*/"
+      },
+      {
+        "command": "zowe.deleteMember",
+        "key": "ctrl+delete",
+        "mac": "cmd+delete",
+        "when": "view == zowe.explorer && viewItem =~ /^member.*/"
+      },
+      {
+        "command": "zowe.uss.deleteNode",
+        "key": "ctrl+delete",
+        "mac": "cmd+delete",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^(?!(ussSession|favorite|.*_fav))/"
+      },
+      {
+        "command": "zowe.deleteDataset",
+        "key": "ctrl+delete",
+        "mac": "cmd+delete",
+        "when": "view == zowe.explorer && viewItem =~ /^ds.*/"
+      },
+      {
+        "command": "zowe.editMember",
+        "key": "ctrl+z+e",
+        "mac": "cmd+z+e",
+        "when": "view == zowe.explorer && viewItem =~ /^(member.*|ds.*)/"
+      },
+      {
+        "command": "zowe.uss.editFile",
+        "key": "ctrl+z+e",
+        "mac": "cmd+z+e",
+        "when": "view == zowe.uss.explorer && viewItem =~ /^textFile|binaryFile/"
+      },
+      {
+        "command": "zowe.copyDataSet",
+        "key": "ctrl+c",
+        "mac": "cmd+c",
+        "when": "view == zowe.explorer && viewItem =~ /^(member|ds).*/"
+      },
+      {
+        "command": "zowe.submitMember",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "view == zowe.explorer && viewItem =~ /^ds.*/"
+      },
+      {
+        "command": "zowe.submitMember",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "view == zowe.explorer && viewItem =~ /^member.*/"
+      },
+      {
+        "command": "zowe.submitMember",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "view == zowe.jobs && viewItem =~ /^(?!.*_fav.*)job.*/"
       }
     ],
     "commands": [
