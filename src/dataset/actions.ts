@@ -28,7 +28,7 @@ import { DatasetTree } from "./DatasetTree";
 import * as contextually from "../shared/context";
 
 import * as nls from "vscode-nls";
-const localize = nls.config({messageFormat: nls.MessageFormat.file})();
+const localize = nls.config({ messageFormat: nls.MessageFormat.file })();
 
 /**
  * Refreshes treeView
@@ -50,9 +50,9 @@ export async function refreshAll(datasetProvider: IZoweTree<IZoweDatasetTreeNode
 
 export async function uploadDialog(node: ZoweDatasetNode, datasetProvider: IZoweTree<IZoweDatasetTreeNode>) {
     const fileOpenOptions = {
-       canSelectFiles: true,
-       openLabel: "Upload File",
-       canSelectMany: true
+        canSelectFiles: true,
+        openLabel: "Upload File",
+        canSelectMany: true
     };
 
     const value = await vscode.window.showOpenDialog(fileOpenOptions);
@@ -60,10 +60,10 @@ export async function uploadDialog(node: ZoweDatasetNode, datasetProvider: IZowe
     if (value && value.length) {
         await Promise.all(
             value.map(async (item) => {
-                    // Convert to vscode.TextDocument
-                    const doc = await vscode.workspace.openTextDocument(item);
-                    await uploadFile(node, doc);
-                }
+                // Convert to vscode.TextDocument
+                const doc = await vscode.workspace.openTextDocument(item);
+                await uploadFile(node, doc);
+            }
             ));
 
         // refresh Tree View & favorites
@@ -146,13 +146,13 @@ export async function openPS(node: IZoweDatasetTreeNode, previewMember: boolean,
                     label = node.label.substring(node.label.indexOf(":") + 1).trim();
                     break;
                 case contextually.isFavoritePds(node.getParent()):
-                    label = node.getParent().getLabel().substring(node.getParent().getLabel().indexOf(":") + 1).trim() + "(" + node.getLabel()+ ")";
+                    label = node.getParent().getLabel().substring(node.getParent().getLabel().indexOf(":") + 1).trim() + "(" + node.getLabel() + ")";
                     break;
                 case contextually.isSessionNotFav(node.getParent()):
                     label = node.label.trim();
                     break;
                 case contextually.isPdsNotFav(node.getParent()):
-                    label = node.getParent().getLabel().trim() + "(" + node.getLabel()+ ")";
+                    label = node.getParent().getLabel().trim() + "(" + node.getLabel() + ")";
                     break;
                 default:
                     vscode.window.showErrorMessage(localize("openPS.invalidNode", "openPS() called from invalid node."));
@@ -177,7 +177,7 @@ export async function openPS(node: IZoweDatasetTreeNode, previewMember: boolean,
             if (previewMember === true) {
                 await vscode.window.showTextDocument(document);
             } else {
-                await vscode.window.showTextDocument(document, {preview: false});
+                await vscode.window.showTextDocument(document, { preview: false });
             }
             if (datasetProvider) { datasetProvider.addRecall(`[${node.getProfileName()}]: ${label}`); }
         } catch (err) {
@@ -254,7 +254,7 @@ export async function createFile(node: IZoweDatasetTreeNode, datasetProvider: IZ
         }
 
         // get name of data set
-        let name = await vscode.window.showInputBox({placeHolder: localize("dataset.name", "Name of Data Set")});
+        let name = await vscode.window.showInputBox({ placeHolder: localize("dataset.name", "Name of Data Set") });
         if (name) {
             name = name.trim().toUpperCase();
 
@@ -371,7 +371,7 @@ export async function renameDataSet(node: IZoweDatasetTreeNode, datasetProvider:
         favPrefix = node.label.substring(0, node.label.indexOf(":") + 2);
         beforeDataSetName = node.label.substring(node.label.indexOf(":") + 2);
     }
-    const afterDataSetName = await vscode.window.showInputBox({value: beforeDataSetName});
+    const afterDataSetName = await vscode.window.showInputBox({ value: beforeDataSetName });
     const beforeFullPath = getDocumentFilePath(node.getLabel(), node);
     const closedOpenedInstance = await closeOpenedTextFile(beforeFullPath);
 
@@ -394,7 +394,7 @@ export async function renameDataSet(node: IZoweDatasetTreeNode, datasetProvider:
             datasetProvider.updateFavorites();
 
             if (fs.existsSync(beforeFullPath)) {
-              fs.unlinkSync(beforeFullPath);
+                fs.unlinkSync(beforeFullPath);
             }
 
             if (closedOpenedInstance) {
@@ -496,7 +496,7 @@ export async function submitMember(node: IZoweTreeNode) {
         case contextually.isFavoritePds(node.getParent()):
             regex = labelregex.exec(node.getParent().getLabel());
             sesName = regex[1];
-            label = regex[2] + "(" + node.label.trim()+ ")";
+            label = regex[2] + "(" + node.label.trim() + ")";
             sessProfile = node.getParent().getProfile();
             break;
         case contextually.isSessionNotFav(node.getParent()):
@@ -506,7 +506,7 @@ export async function submitMember(node: IZoweTreeNode) {
             break;
         case contextually.isPdsNotFav(node.getParent()):
             sesName = node.getParent().getParent().getLabel();
-            label = node.getParent().getLabel() + "(" + node.label.trim()+ ")";
+            label = node.getParent().getLabel() + "(" + node.label.trim() + ")";
             sessProfile = node.getParent().getParent().getProfile();
             break;
         default:
@@ -541,7 +541,7 @@ export async function renameDataSetMember(node: IZoweTreeNode, datasetProvider: 
     } else {
         dataSetName = node.getParent().getLabel();
     }
-    const afterMemberName = await vscode.window.showInputBox({value: beforeMemberName});
+    const afterMemberName = await vscode.window.showInputBox({ value: beforeMemberName });
     const beforeFullPath = getDocumentFilePath(`${node.getParent().getLabel()}(${node.getLabel()})`, node);
     const closedOpenedInstance = await closeOpenedTextFile(beforeFullPath);
 
@@ -597,7 +597,7 @@ export async function deleteDataset(node: IZoweTreeNode, datasetProvider: IZoweT
     };
     // confirm that the user really wants to delete
     if (await vscode.window.showQuickPick([localize("deleteDataset.showQuickPick.yes", "Yes"),
-        localize("deleteDataset.showQuickPick.no", "No")], quickPickOptions) !== localize("deleteDataset.showQuickPick.yes", "Yes")) {
+    localize("deleteDataset.showQuickPick.no", "No")], quickPickOptions) !== localize("deleteDataset.showQuickPick.yes", "Yes")) {
         globals.LOG.debug(localize("deleteDataset.showQuickPick.log.debug", "User picked no. Cancelling delete of data set"));
         return;
     }
@@ -611,14 +611,14 @@ export async function deleteDataset(node: IZoweTreeNode, datasetProvider: IZoweT
                 fav = true;
                 break;
             case (globals.DS_PDS_CONTEXT + globals.FAV_SUFFIX):
-                label = node.getParent().getLabel().substring(node.getParent().getLabel().indexOf(":") + 1).trim() + "(" + node.getLabel()+ ")";
+                label = node.getParent().getLabel().substring(node.getParent().getLabel().indexOf(":") + 1).trim() + "(" + node.getLabel() + ")";
                 fav = true;
                 break;
             case (globals.DS_SESSION_CONTEXT):
                 label = node.getLabel();
                 break;
             case (globals.DS_PDS_CONTEXT):
-                label = node.getParent().getLabel()+ "(" + node.getLabel()+ ")";
+                label = node.getParent().getLabel() + "(" + node.getLabel() + ")";
                 break;
             default:
                 throw Error(localize("deleteDataSet.invalidNode.error", "deleteDataSet() called from invalid node."));
@@ -638,9 +638,9 @@ export async function deleteDataset(node: IZoweTreeNode, datasetProvider: IZoweT
     // remove node from tree
     if (fav) {
         datasetProvider.mSessionNodes.forEach((ses) => {
-            if (node.label.substring(node.label.indexOf("[") + 1, node.label.indexOf("]")) === ses.label.trim()||
+            if (node.label.substring(node.label.indexOf("[") + 1, node.label.indexOf("]")) === ses.label.trim() ||
                 node.getParent().getLabel().substring(node.getParent().getLabel().indexOf("["),
-                        node.getParent().getLabel().indexOf("]")) === ses.label) {
+                    node.getParent().getLabel().indexOf("]")) === ses.label) {
                 ses.dirty = true;
             }
         });
@@ -691,7 +691,7 @@ export async function refreshPS(node: IZoweDatasetTreeNode) {
                 label = node.label.substring(node.label.indexOf(":") + 1).trim();
                 break;
             case contextually.isFavoritePds(node.getParent()):
-                label = node.getParent().getLabel().substring(node.getParent().getLabel().indexOf(":") + 1).trim() + "(" + node.getLabel()+ ")";
+                label = node.getParent().getLabel().substring(node.getParent().getLabel().indexOf(":") + 1).trim() + "(" + node.getLabel() + ")";
                 break;
             case contextually.isSessionNotFav(node.getParent()):
                 label = node.label.trim();
@@ -743,7 +743,7 @@ export async function enterPattern(node: IZoweDatasetTreeNode, datasetProvider: 
         // manually entering a search
         const options: vscode.InputBoxOptions = {
             prompt: localize("enterPattern.options.prompt",
-                                     "Search data sets by entering patterns: use a comma to separate multiple patterns"),
+                "Search data sets by entering patterns: use a comma to separate multiple patterns"),
             value: node.pattern
         };
         // get user input
@@ -792,10 +792,52 @@ export async function copyDataSet(node: IZoweNodeType) {
  * @export
  * @param {IZoweDatasetTreeNode} node - The node to paste to
  */
-export async function hMigrateDataSet(node: ZoweDatasetNode) {
+export async function hMigrateDataSet(node: ZoweDatasetNode, datasetProvider: IZoweTree<IZoweDatasetTreeNode>) {
     const { dataSetName } = dsUtils.getNodeLabels(node);
+
+    let favPrefix = "";
+    let isFavourite;
+
+    if (node.contextValue.includes(globals.FAV_SUFFIX)) {
+        isFavourite = true;
+        favPrefix = node.label.substring(0, node.label.indexOf(":") + 2);
+    }
+    const beforeFullPath = getDocumentFilePath(node.getLabel(), node);
+    const closedOpenedInstance = await closeOpenedTextFile(beforeFullPath);
+
     vscode.window.showInformationMessage(localize("hMigrate.requestSent1", "Migration of dataset: ") + dataSetName +
-    localize("hMigrate.requestSent2", " requested."));
+        localize("hMigrate.requestSent2", " requested."));
+    if (dataSetName) {
+        try {
+            await ZoweExplorerApiRegister.getMvsApi(node.getProfile()).hMigrateDataSet(dataSetName);
+            // node.label = `${favPrefix}${dataSetName}`;
+
+            if (isFavourite) {
+                const profile = favPrefix.substring(1, favPrefix.indexOf("]"));
+                datasetProvider.hMigrateNode(profile, dataSetName);
+            } else {
+                datasetProvider.hMigrateFavourite(node, dataSetName);
+            }
+            datasetProvider.refreshElement(node);
+            datasetProvider.updateFavorites();
+            // datasetProvider.refresh();
+            // datasetProvider.getTreeItem(node);
+            // datasetProvider.getTreeView();
+            // refreshAll(datasetProvider);
+
+            if (fs.existsSync(beforeFullPath)) {
+                fs.unlinkSync(beforeFullPath);
+            }
+            if (closedOpenedInstance) {
+                vscode.commands.executeCommand("zowe.ZoweNode.openPS", node);
+            }
+
+        } catch (err) {
+            globals.LOG.error(localize("hMigrateDataSet.log.error", "Error encountered when migrating data set! ") + JSON.stringify(err));
+            errorHandling(err, favPrefix, localize("hMigrateDataSet.error", "Unable to migrate data set: ") + dataSetName);
+            throw err;
+        }
+    }
     return ZoweExplorerApiRegister.getMvsApi(node.getProfile()).hMigrateDataSet(dataSetName);
 }
 
@@ -808,7 +850,7 @@ export async function hMigrateDataSet(node: ZoweDatasetNode) {
 export async function hRecallDataSet(node: ZoweDatasetNode) {
     const { dataSetName } = dsUtils.getNodeLabels(node);
     vscode.window.showInformationMessage(localize("hRecall.requestSent1", "Recall of dataset: ") + dataSetName +
-    localize("hRecall.requestSent2", " requested."));
+        localize("hRecall.requestSent2", " requested."));
     return ZoweExplorerApiRegister.getMvsApi(node.getProfile()).hRecallDataSet(dataSetName);
 }
 
@@ -827,7 +869,7 @@ export async function pasteDataSet(node: IZoweDatasetTreeNode, datasetProvider: 
     let beforeMemberName;
 
     if (node.contextValue.includes(globals.DS_PDS_CONTEXT)) {
-        memberName = await vscode.window.showInputBox({placeHolder: localize("renameDataSet.name", "Name of Data Set Member")});
+        memberName = await vscode.window.showInputBox({ placeHolder: localize("renameDataSet.name", "Name of Data Set Member") });
         if (!memberName) {
             return;
         }
@@ -846,7 +888,7 @@ export async function pasteDataSet(node: IZoweDatasetTreeNode, datasetProvider: 
     if (beforeProfileName === profileName) {
         if (memberName) {
             const responseItem: zowe.IZosFilesResponse = await ZoweExplorerApiRegister.getMvsApi(node.getProfile()).allMembers(`${dataSetName}`);
-            if (responseItem.apiResponse.items.some( (singleItem) => singleItem.member === memberName.toUpperCase())) {
+            if (responseItem.apiResponse.items.some((singleItem) => singleItem.member === memberName.toUpperCase())) {
                 throw Error(`${dataSetName}(${memberName}) already exists. You cannot replace a member`);
             }
         }
@@ -886,7 +928,7 @@ export async function saveFile(doc: vscode.TextDocument, datasetProvider: IZoweT
     if (docPath.toUpperCase().indexOf(globals.DS_DIR.toUpperCase()) === -1) {
         globals.LOG.debug(localize("saveFile.log.debug.path", "path.relative returned a non-blank directory.") +
             localize("saveFile.log.debug.directory",
-                             "Assuming we are not in the DS_DIR directory: ") + path.relative(docPath, globals.DS_DIR));
+                "Assuming we are not in the DS_DIR directory: ") + path.relative(docPath, globals.DS_DIR));
         return;
     }
     const start = path.join(globals.DS_DIR + path.sep).length;
@@ -1016,7 +1058,7 @@ export async function saveFile(doc: vscode.TextDocument, datasetProvider: IZoweT
             location: vscode.ProgressLocation.Notification,
             title: localize("saveFile.response.save.title", "Saving data set...")
         }, () => {
-            return ZoweExplorerApiRegister.getMvsApi(node ? node.getProfile(): profile).putContents(doc.fileName, label, uploadOptions);
+            return ZoweExplorerApiRegister.getMvsApi(node ? node.getProfile() : profile).putContents(doc.fileName, label, uploadOptions);
         });
         if (uploadResponse.success) {
             vscode.window.showInformationMessage(uploadResponse.commandResponse);
@@ -1027,11 +1069,11 @@ export async function saveFile(doc: vscode.TextDocument, datasetProvider: IZoweT
         } else if (!uploadResponse.success && uploadResponse.commandResponse.includes(
             localize("saveFile.error.ZosmfEtagMismatchError", "Rest API failure with HTTP(S) status 412"))) {
             if (globals.ISTHEIA) {
-                await willForceUpload(node, doc, label, node ? node.getProfile(): profile);
+                await willForceUpload(node, doc, label, node ? node.getProfile() : profile);
             } else {
                 const oldDoc = doc;
                 const oldDocText = oldDoc.getText();
-                const downloadResponse = await ZoweExplorerApiRegister.getMvsApi(node ? node.getProfile(): profile).getContents(label, {
+                const downloadResponse = await ZoweExplorerApiRegister.getMvsApi(node ? node.getProfile() : profile).getContents(label, {
                     file: doc.fileName,
                     returnEtag: true
                 });
@@ -1041,7 +1083,7 @@ export async function saveFile(doc: vscode.TextDocument, datasetProvider: IZoweT
                     node.setEtag(downloadEtag);
                 }
                 vscode.window.showWarningMessage(localize("saveFile.error.etagMismatch",
-                "Remote file has been modified in the meantime.\nSelect 'Compare' to resolve the conflict."));
+                    "Remote file has been modified in the meantime.\nSelect 'Compare' to resolve the conflict."));
                 // Store document in a separate variable, to be used on merge conflict
                 const startPosition = new vscode.Position(0, 0);
                 const endPosition = new vscode.Position(oldDoc.lineCount, 0);

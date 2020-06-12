@@ -56,6 +56,8 @@
     "enterPattern.options.prompt": "Search data sets by entering patterns: use a comma to separate multiple patterns",
     "hMigrate.requestSent1": "Migration of dataset: ",
     "hMigrate.requestSent2": " requested.",
+    "hMigrateDataSet.log.error": "Error encountered when migrating data set! ",
+    "hMigrateDataSet.error": "Unable to migrate data set: ",
     "hRecall.requestSent1": "Recall of dataset: ",
     "hRecall.requestSent2": " requested.",
     "renameDataSet.name": "Name of Data Set Member",

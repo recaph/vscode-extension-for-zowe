@@ -342,6 +342,24 @@ export class DatasetTree extends ZoweTreeProvider implements IZoweTree<IZoweData
     }
 
     /**
+     * Migrates a node based on the profile and it's label
+     *
+     * @param profileLabel
+     * @param dataSetName
+     */
+    public async hMigrateNode(profileLabel: string, dataSetName: string) {
+    }
+
+    /**
+     * Migrates a node from the favorites list
+     *
+     * @param node
+     * @param dataSetName
+     */
+    public async hMigrateFavorite(node: IZoweDatasetTreeNode, dataSetName: string) {
+    }
+
+    /**
      * Finds the equivalent node as a favorite
      *
      * @param node

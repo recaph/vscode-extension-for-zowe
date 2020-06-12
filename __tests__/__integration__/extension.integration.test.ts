@@ -621,7 +621,7 @@ describe("Extension Integration Tests", () => {
                         const node = new ZoweDatasetNode(dataSetName, vscode.TreeItemCollapsibleState.None, sessionNode, session);
                         node.contextValue = DS_DS_CONTEXT;
 
-                        await dsActions.hMigrateDataSet(node);
+                        await dsActions.hMigrateDataSet(node, testTree);
                     } catch (err) {
                         error = err;
                     }
@@ -647,7 +647,7 @@ describe("Extension Integration Tests", () => {
                         const node = new ZoweDatasetNode(dataSetName, vscode.TreeItemCollapsibleState.None, sessionNode, session);
                         node.contextValue = DS_DS_CONTEXT;
 
-                        await dsActions.hMigrateDataSet(node);
+                        await dsActions.hMigrateDataSet(node,testTree);
                     } catch (err) {
                         error = err;
                     }
@@ -666,7 +666,7 @@ describe("Extension Integration Tests", () => {
                         const node = new ZoweDatasetNode(dataSetName, vscode.TreeItemCollapsibleState.None, sessionNode, session);
                         node.contextValue = DS_DS_CONTEXT;
 
-                        await dsActions.hMigrateDataSet(node);
+                        await dsActions.hMigrateDataSet(node, testTree);
                     } catch (err) {
                         error = err;
                     }

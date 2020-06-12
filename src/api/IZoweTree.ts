@@ -192,6 +192,13 @@ export interface IZoweTree<T> extends vscode.TreeDataProvider<T> {
      */
     renameFavorite(node: IZoweDatasetTreeNode, newLabel: string);
     /**
+     * Migrates a node from the favorites list
+     *
+     * @param {IZoweDatasetTreeNode} node
+     * @deprecated should not be visible outside of class
+     */
+    hMigrateFavourite?(node: IZoweDatasetTreeNode, dataSetName: string);
+    /**
      * Renames a node based on the profile and it's label
      * @deprecated should not be visible outside of class
      *
@@ -223,6 +230,11 @@ export interface IZoweTree<T> extends vscode.TreeDataProvider<T> {
      * @param {string} afterLabel
      */
     renameNode(profile: string, beforeDataSetName: string, afterDataSetName: string);
+    /**
+     * @param {string} profile
+     * @param {string} dataSetName
+     */
+    hMigrateNode?(profile: string, dataSetName: string);
     /**
      * Opens an item & reveals it in the tree
      *

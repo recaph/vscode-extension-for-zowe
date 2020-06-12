@@ -1502,7 +1502,7 @@ describe("Dataset Actions Unit Tests - Function hMigrateDataSet", () => {
             }
         });
 
-        await dsActions.hMigrateDataSet(node);
+        await dsActions.hMigrateDataSet(node, blockMocks.testDatasetTree);
 
         expect(migrateSpy).toHaveBeenCalledWith("HLQ.TEST.TO.NODE");
         expect(mocked(vscode.window.showInformationMessage)).toHaveBeenCalled();
