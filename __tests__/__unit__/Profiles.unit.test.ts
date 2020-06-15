@@ -500,8 +500,8 @@ describe("Profiles Unit Tests - Function promptCredentials", () => {
         newMocks.imperativeProfile.profile.password = "1234";
         newMocks.profiles = await Profiles.createInstance(newMocks.log);
         newMocks.profileInstance = createInstanceOfProfile(newMocks.profiles);
-        newMocks.profileInstance.allProfiles[1].profile = {user: "test", password: "test"};
-        newMocks.profileInstance.loadNamedProfile = newMocks.mockLoadNamedProfile;
+        newMocks.profiles.allProfiles[1].profile = {user: "test", password: "test"};
+        newMocks.profiles.loadNamedProfile = newMocks.mockLoadNamedProfile;
 
         return newMocks;
     }
@@ -543,8 +543,9 @@ describe("Profiles Unit Tests - Function promptCredentials", () => {
         blockMocks.imperativeProfile.profile = { user: undefined, password: "oldfake" };
         blockMocks.mockLoadNamedProfile.mockReturnValue(blockMocks.imperativeProfile);
         globalMocks.mockCreateBasicZosmfSession.mockReturnValue(
-            { ISession: { user: "fake", password: "fake", base64EncodedAuth: "fake" } });
+            { ISession: { user: "fake", password: "oldfake", base64EncodedAuth: "fake" } });
         globalMocks.mockShowInputBox.mockResolvedValueOnce("fake");
+        globalMocks.mockShowInputBox.mockResolvedValueOnce("oldfake");
 
         const res = await blockMocks.profiles.promptCredentials(blockMocks.imperativeProfile.name, true);
         expect(res).toEqual(["fake", "oldfake", "fake"]);
@@ -557,7 +558,8 @@ describe("Profiles Unit Tests - Function promptCredentials", () => {
         blockMocks.imperativeProfile.profile = { user: "oldfake", password: undefined };
         blockMocks.mockLoadNamedProfile.mockReturnValue(blockMocks.imperativeProfile);
         globalMocks.mockCreateBasicZosmfSession.mockReturnValue(
-            { ISession: { user: "fake", password: "fake", base64EncodedAuth: "fake" } });
+            { ISession: { user: "oldfake", password: "fake", base64EncodedAuth: "fake" } });
+        globalMocks.mockShowInputBox.mockResolvedValueOnce("oldfake");
         globalMocks.mockShowInputBox.mockResolvedValueOnce("fake");
 
         const res = await blockMocks.profiles.promptCredentials(blockMocks.imperativeProfile.name, true);

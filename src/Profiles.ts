@@ -970,7 +970,6 @@ export class Profiles {
     }
 
     private async passwordInfo(input?) {
-
         let passWord: string;
 
         if (input) {
