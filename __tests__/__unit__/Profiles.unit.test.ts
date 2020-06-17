@@ -536,7 +536,7 @@ describe("Profiles Unit Tests - Function promptCredentials", () => {
         expect(res).toEqual(["fake", "fake", "fake"]);
     });
 
-    it("Tests that promptCredentials is executed successfully when profile doesn't have a usernmame", async () => {
+    it("Tests that promptCredentials is executed successfully when profile doesn't have a username", async () => {
         const globalMocks = await createGlobalMocks();
         const blockMocks = await createBlockMocks(globalMocks);
 
@@ -547,7 +547,7 @@ describe("Profiles Unit Tests - Function promptCredentials", () => {
         globalMocks.mockShowInputBox.mockResolvedValueOnce("fake");
         globalMocks.mockShowInputBox.mockResolvedValueOnce("oldfake");
 
-        const res = await blockMocks.profiles.promptCredentials(blockMocks.imperativeProfile.name, true);
+        const res = await blockMocks.profiles.promptCredentials(blockMocks.imperativeProfile.name);
         expect(res).toEqual(["fake", "oldfake", "fake"]);
     });
 
@@ -562,7 +562,7 @@ describe("Profiles Unit Tests - Function promptCredentials", () => {
         globalMocks.mockShowInputBox.mockResolvedValueOnce("oldfake");
         globalMocks.mockShowInputBox.mockResolvedValueOnce("fake");
 
-        const res = await blockMocks.profiles.promptCredentials(blockMocks.imperativeProfile.name, true);
+        const res = await blockMocks.profiles.promptCredentials(blockMocks.imperativeProfile.name);
         expect(res).toEqual(["oldfake", "fake", "fake"]);
     });
 
@@ -590,7 +590,7 @@ describe("Profiles Unit Tests - Function promptCredentials", () => {
         const res = await blockMocks.profiles.promptCredentials(blockMocks.imperativeProfile.name);
         expect(res).toBeUndefined();
     });
-    
+
 });
 
 describe("Profiles Unit Tests - Function validateAndParseUrl", () => {
